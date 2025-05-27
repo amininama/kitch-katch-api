@@ -21,9 +21,9 @@ const swaggerOptions = {
   definition: {
     openapi: '3.0.0',
     info: {
-      title: 'Kitchen Pal API',
+      title: 'Kitch-Katch API',
       version: '1.0.0',
-      description: 'API documentation for Kitchen Pal application',
+      description: 'API documentation for Kitch-Katch application',
     },
     servers: [
       {
