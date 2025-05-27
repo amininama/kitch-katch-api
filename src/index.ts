@@ -26,11 +26,13 @@ const swaggerOptions = {
       description: 'API documentation for Kitch-Katch application',
     },
     servers: [
-      {
-        url: 'http://localhost:3000',
-        description: 'Development server',
-      },
-    ],
+        {
+          url: process.env.NODE_ENV === 'production' 
+            ? process.env.API_URL || 'https://kitch-katch.onrender.com' 
+            : 'http://localhost:3000',
+          description: process.env.NODE_ENV === 'production' ? 'Production server' : 'Development server',
+        },
+      ],
   },
   apis: ['./src/routes/*.ts'], // Path to the API routes
 };
@@ -87,7 +89,10 @@ app.use((err: Error, req: express.Request, res: express.Response, next: express.
 
 // Start server
 const PORT = process.env.PORT || 3000;
+const baseUrl = process.env.NODE_ENV === 'production' 
+  ? process.env.API_URL || 'https://kitch-katch.onrender.com'
+  : `http://localhost:${PORT}`;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
-  console.log(`Swagger documentation available at http://localhost:${PORT}/docs`);
+  console.log(`Swagger documentation available at http://${baseUrl}:${PORT}/docs`);
 }); 
